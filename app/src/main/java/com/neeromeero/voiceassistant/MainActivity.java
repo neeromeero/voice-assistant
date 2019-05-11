@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onClickListener() {
         String message = userMessage.getText().toString();// текст пользователйа
-
         userMessage.setText("");
-
         chatWindow.append("\n>> " + message);
-        chatWindow.append("\n<< Ok, ponyal");
+
+        String answer = AI.getAnswer(message);
+        chatWindow.append("\n<< " + answer);
 
     }
 }
