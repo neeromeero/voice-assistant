@@ -1,27 +1,32 @@
 package com.neeromeero.voiceassistant;
 
-import android.os.Build;
+import android.support.v4.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AI {
-    public static String getAnswer(String user_question){
+    public static void getAnswer(String user_question, final Consumer<String> callback ){
 
 
-        Map <String, String> database = new HashMap<>(); {
+        Map <String, String> database = new HashMap<String, String>() {
             {
-                database.put("привет", "И вам здрасте");
-                database.put("как дела","Да вроде ничего");
-                database.put("чем занимаешься","Отвечаю на дурацкие вопросы");
-                database.put("как тебя зовут", "Я - голосовой помощник \uD83E\uDD55 v0.1 ");
-                database.put("кто тебя создал","Господь\uD83D\uDE07, конечно же \uD83D\uDE44");
-            }}
+                put("привет", "И вам здрасте");
+                put("как дела","Да вроде ничего");
+                put("чем занимаешься","Отвечаю на дурацкие вопросы");
+                put("как тебя зовут", "Я - голосовой помощник \uD83E\uDD55 v0.1 ");
+                put("кто тебя создал", "NeeroMeero");
+                put("кто сейчас президент России", "Посмотри по телевизору");
+                put("какого цвета небо", "Вроде с утра было синее");
+                put("есть ли жизнь на Марсе","Есть, но она об этом не знает");
+            }};
 
         user_question = user_question.toLowerCase();
 
-        ArrayList<String> answers = new ArrayList<>();
+        final ArrayList<String> answers = new ArrayList<>();
 
 
         for (String database_question : database.keySet()){
@@ -30,10 +35,23 @@ public class AI {
             }
         }
 
-        if(answers.isEmpty()){
-            return "Понял принял, не могу ответить";
+        Pattern cityPattern = Pattern.compile("какая погода в городе (\\p{L}+)",Pattern.CASE_INSENSITIVE);
+        Matcher matcher = cityPattern.matcher(user_question);
+        if(matcher.find()) {
+            String cityName = matcher.group(1);
+            Weather.get(cityName, new Consumer<String>() {
+                @Override
+                public void accept(String s) {
+                    answers.add(s);
+                    callback.accept(String.join(", ", answers));
+                }
+            });
+        } else {
+            if(answers.isEmpty()){
+                callback.accept("Понял принял, не могу ответить");
+                return;
+            }
+            callback.accept(String.join(", ", answers));//разобраться. работает не на всех api
         }
-        return String.join(", ", answers);//разобраться. работает не на всех api
-
     }
 }
