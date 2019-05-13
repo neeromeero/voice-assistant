@@ -2,17 +2,19 @@ package com.neeromeero.voiceassistant;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     protected Button sendButton;
     protected EditText userMessage;
-    protected TextView chatWindow;
+    protected RecyclerView chatWindow;
 
+    protected MessageController messageController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +33,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        messageController = new MessageController();
+
+        chatWindow.setLayoutManager(new LinearLayoutManager(this));
+        chatWindow.setAdapter(messageController);
     }
 
     protected void onClickListener() {
         String message = userMessage.getText().toString();// текст пользователйа
         userMessage.setText("");
-        chatWindow.append("\n>> " + message);
-
+        messageController.messageList.add(new Message(message,true));
         String answer = AI.getAnswer(message);
-        chatWindow.append("\n<< " + answer);
+        messageController.messageList.add(new Message(answer,false));
+
+        messageController.notifyDataSetChanged();
+        chatWindow.scrollToPosition(messageController.messageList.size()-1);
 
     }
 }

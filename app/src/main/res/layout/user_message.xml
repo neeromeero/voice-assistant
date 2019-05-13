@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/messageText"
-        android:layout_width="325dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="12dp"
@@ -25,7 +25,7 @@
         android:maxWidth="300dp"
         android:padding="8dp"
         android:text="Привет!!! "
-        android:textColor="@color/colorAccent"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,16 +36,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="User"
+        android:textSize="18sp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="@+id/messageText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/messageTime"
-        android:layout_width="29dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="10:20"
-        android:textSize="10sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/messageText"
-        tools:layout_editor_absoluteY="87dp" />
+        app:layout_constraintTop_toBottomOf="@+id/messageText"/>
 
 </android.support.constraint.ConstraintLayout>
