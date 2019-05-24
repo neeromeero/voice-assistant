@@ -16,8 +16,12 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" >
+
+    </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -31,21 +35,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <Button
+            android:id="@+id/left_button"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:text="L" />
+
+        <Button
+            android:id="@+id/right_button"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:text="R" />
+
         <EditText
             android:id="@+id/userMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Введите ваш вопрос"
+            android:hint="@string/input_question"
             android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
+            android:layout_width="189dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Отправить" />
+            android:text="@string/Send"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

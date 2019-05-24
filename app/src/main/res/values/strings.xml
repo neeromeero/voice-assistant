@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Voice Assistant</string>
+    <string name="input_question">Введите ваш вопрос</string>
+    <string name="Send">Отправить</string>
 </resources>

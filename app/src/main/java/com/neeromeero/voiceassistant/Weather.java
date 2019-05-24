@@ -55,7 +55,6 @@ public class Weather {
                 String result = "там сейчас " + apiResult.current.condition.text +
                 ", где-то " + apiResult.current.temperature.intValue() + " градусов";
                 callback.accept(result);
-
             }
 
             @Override
